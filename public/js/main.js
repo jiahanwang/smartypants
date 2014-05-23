@@ -134,6 +134,7 @@ $(document).ready(function(){
 		}
 	}
 	
+	//
 	$(window).resize(function(){
 		var width = $(this).width();
 		if(width > 768){
@@ -141,6 +142,12 @@ $(document).ready(function(){
 		}else{
 			$sideMenu.css('right', '-500px');
 		}
+	});
+	
+	// beautify switch buttons
+	var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
+	elems.forEach(function(html) {
+	  var switchery = new Switchery(html);
 	});
 });
 

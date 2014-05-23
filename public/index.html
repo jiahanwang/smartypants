@@ -7,8 +7,12 @@
 	<link rel="stylesheet" href="css/main.css"/>
 	<link rel="stylesheet" href="css/weather-icons.min.css"/>
 	<link rel="stylesheet" href="css/jquery.mCustomScrollbar.css" />
+	<link rel="stylesheet" href="css/switchery.min.css" />
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+	<script src="js/switchery.min.js"></script>
 	<script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
 	<script src="js/main.js"></script>
+	
 	<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
 </head>
 <body>
@@ -29,8 +33,7 @@
 </nav>
 <div id="weatherInfoWrapper">
 	<div id="weatherInfo">
-		<ul id="broadcastList">
-		<!--<li><div class="weatherLogo"><i class="wi-day-cloudy"></i></div><div class="tempDetails"><h2>62℉</h2><p><i class="wi-up"></i>&nbsp;62℉&nbsp;&nbsp;<i class="wi-down"></i>&nbsp;47℉</p></div><div class="weatherDetails"><p><i class="wi-sprinkles"></i>60%&nbsp;&nbsp;&nbsp;<i class="wi-strong-wind"></i>5.21mph</p></div></li><li><div class="weatherLogo"><i class="wi-day-sunny"></i></div><div class="tempDetails"><h2>61℉</h2><p><i class="wi-up"></i>&nbsp;67℉&nbsp;&nbsp;<i class="wi-down"></i>&nbsp;44℉</p></div><div class="weatherDetails"><p><i class="wi-sprinkles"></i>73%&nbsp;&nbsp;&nbsp;<i class="wi-strong-wind"></i>3.48mph</p></div></li><li><div class="weatherLogo"><i class="wi-day-sunny"></i></div><div class="tempDetails"><h2>66℉</h2><p><i class="wi-up"></i>&nbsp;71℉&nbsp;&nbsp;<i class="wi-down"></i>&nbsp;48℉</p></div><div class="weatherDetails"><p><i class="wi-sprinkles"></i>71%&nbsp;&nbsp;&nbsp;<i class="wi-strong-wind"></i>3.69mph</p></div></li><li><div class="weatherLogo"><i class="wi-day-sunny"></i></div><div class="tempDetails"><h2>70℉</h2><p><i class="wi-up"></i>&nbsp;76℉&nbsp;&nbsp;<i class="wi-down"></i>&nbsp;53℉</p></div><div class="weatherDetails"><p><i class="wi-sprinkles"></i>67%&nbsp;&nbsp;&nbsp;<i class="wi-strong-wind"></i>3.5mph</p></div></li><li><div class="weatherLogo"><i class="wi-rain"></i></div><div class="tempDetails"><h2>62℉</h2><p><i class="wi-up"></i>&nbsp;62℉&nbsp;&nbsp;<i class="wi-down"></i>&nbsp;60℉</p></div><div class="weatherDetails"><p><i class="wi-sprinkles"></i>0%&nbsp;&nbsp;&nbsp;<i class="wi-strong-wind"></i>4.13mph</p></div></li></ul> -->
+		<ul id="broadcastList"></ul>
 	</div>
 </div>
 <div id="sideMenu" class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -40,10 +43,30 @@
       
       </ul>
 </div>
-<div id="mainPanel">
-	  <div id="buttonPanel" class="circular">
-		<span id = "mainButton" class="glyphicon glyphicon-off"></span>
-	  </div>
+<div id="mainPanel" class="container-fluid">
+	<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2 roomListWrapper">
+		<ul id="roomList">
+			<li>
+				<span class="roomName">Living Room</span>
+				<span class="switchButton"><input type="checkbox" class="js-switch" checked /></span>
+			</li>
+			<li>
+				<span class="roomName">Master Bedroom</span>
+				<span class="switchButton"><input type="checkbox" class="js-switch" checked /></span>
+			</li>
+			<li>
+				<span class="roomName">Guest Bedroom</span>
+				<span class="switchButton"><input type="checkbox" class="js-switch" checked /></span>
+			</li>
+			<li>
+				<span class="roomName">Kitchen</span>
+				<span class="switchButton"><input type="checkbox" class="js-switch" checked /></span>
+			</li>
+
+		</ul>
+	</div>
+</div>
+		
 </div>
 </body>
 </html>
