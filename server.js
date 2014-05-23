@@ -8,7 +8,11 @@ var http = require('http'),
 		".json" : "application/json",
 		".png" : "image/png",
 		".gif" : "image/gif",
-		".jpg" : "image/jpeg"
+		".jpg" : "image/jpeg",
+		".woff" : "application/font-woff",
+		".ttf" : "application/x-font-ttf",
+		".svg" : "image/svg+xml",
+		".eot": "application/vnd.ms-fontobject"
 	};
 
 function requestHandler(req, res){
@@ -31,8 +35,8 @@ function postHandler(req, res){
 function getHandler(req, res){
 	var fileName = path.basename(req.url) || 'index.html',
 	ext = path.extname(fileName);
-	localPath = __dirname + '/public/' + fileName;
-	console.log("Get " + fileName);
+	localPath = __dirname + '/public' + path.dirname(req.url) + '/' + fileName;
+	console.log("Getting " + localPath);
 	if(!extensions[ext]){
 		respondClientError(404, res);
 	}else{

@@ -14,7 +14,7 @@ nav#navBar{
     width: 100%;
     min-width: 250px;
 	z-index: 100;
-    background-color: #666;  
+    background-color: #585858;  
     border: none;
     box-shadow: 0px 1px 15px #6F6F6F;
 }
@@ -89,14 +89,26 @@ html {
 a#title{
     position: absolute;
     left: 50%;
-    margin-left: -58px;
+    margin-left: -35px;
     font-size: 16px;
 }
 
 a#weather{
-    font-size: 16px;
+    font-size: 14px;
 }
 
+a#weather.opened{
+    background-color: #6D6D6D;
+}
+
+a#weather:focus, a#weather:hover {
+    background-color: #6D6D6D;
+
+}
+
+a#weather i {
+    font-size: 20px;
+}
 
 div#sideMenu {
     display: block;
@@ -105,14 +117,14 @@ div#sideMenu {
     min-width: 150px;
     max-width: 300px;
     max-height: 100%;
-    background-color: #666;
+    background-color: #585858;
     position: fixed;
     z-index: 90;
     right: -1000px;
+    opacity: 0.9;
 }
 
 div.navbar-header {
-    background-color: #666;
 }
 div#sideMenu ul {
     margin-top: 50px;
@@ -120,7 +132,7 @@ div#sideMenu ul {
 #sideMenu a {
     color: #F3F3F3;
     font-size: 14px;
-    border-bottom: #797979 1px solid;
+    border-bottom: #838383 1px solid;
     padding: 14px 15px 14px 15px;
 }
 
@@ -135,7 +147,7 @@ div#sideMenu li {
     background-color: #797979;
 }
 
-.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
+.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
     border: #ddd 1px solid;
 }
 
@@ -146,7 +158,95 @@ div#sideMenu li {
 		top: -50px;
 		right: 0px;
 	}
+	
+	div#sideMenu a{
+		border-bottom: none;
+	}
 
 }
 
+div#weatherInfoWrapper {
+    position: absolute;      
+	top: -200px;      
+	left: 0px;      
+	z-index: 90;            
+    width: 100%;
+    background-color: #585858;  
+	color: #F3F3F3;
+    opacity: 0.9;
+}
+
+div#weatherInfo {
+    width: 1100px;
+    
+}
+
+h2 {
+    margin-bottom: 0px;
+}
+
+div#weatherInfo div.tempDetails {
+    float: right;
+    margin: 0px 15px 0px 10px;
+    font-size: 15px;
+}
+
+div.tempDetails  p.weatherDate {
+    float: right;
+    margin-bottom: 10px;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+div#weatherInfo div.weatherLogo {
+    float: left;
+    font-size: 50px;
+    margin: 15px 15px 0px 10px;
+}
+
+div#weatherInfo div.weatherDetails i {
+    font-weight: bold;
+    font-size: 20px;
+    padding: 0px 10px;
+}
+
+div#weatherInfo div.weatherDetails h2 {
+    font-size: 25px;  
+	margin-bottom: 0px;
+}
+
+ul#broadcastList {
+    margin: 0px;
+    padding: 0px;
+}
+
+ul#broadcastList li {
+    float: left;
+    display: inline;
+    border-right: #7E7E7E 2px solid;
+    margin: 15px 0px 10px 15px;
+}
+
+div.weatherDetails {
+    font-size: 15px;
+    clear: both;
+}
+
+div.weatherDetails {
+    margin: 0px 15px 10px 0px;
+}
+
+div.weatherLogo i{
+	
+}
+
+div.weatherLogo [class^=wi-]:before, [class*=" wi-"]:before{
+	width: 55px !important;
+	height: 70px !important;
+}
+
+
+ul#broadcastList li:last-child {
+    border-right: none;
+}
 
