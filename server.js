@@ -15,6 +15,8 @@ var http = require('http'),
 		".eot": "application/vnd.ms-fontobject"
 	};
 
+module.exports.start = createServer;
+	
 function requestHandler(req, res){
 	switch(req.method){
 		case "POST": 
@@ -93,7 +95,7 @@ function createServer(){
 	console.log("HTTP server is listening on 3000 ...");
 }
 
-module.exports.start = createServer;
+
 
 
 

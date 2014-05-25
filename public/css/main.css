@@ -2,12 +2,15 @@ body{
     height: 100%;
     min-width: 250px;
 	font-family: Open Sans, sans-serif;
+    background-color: #F1F1F1;
 }
+
+
 
 div#mainPanel{
     height: 100%;
     width: 100%;
-    padding-top: 80px;
+    padding: 0px;
 }
 
 nav#navBar{
@@ -18,7 +21,7 @@ nav#navBar{
 	z-index: 100;
     background-color: #585858;  
     border: none;
-    box-shadow: 0px 1px 15px #6F6F6F;
+    /* box-shadow: 0px 1px 15px #6F6F6F; */
 }
 
 
@@ -33,7 +36,7 @@ div#mainButton {
 
 span#mainButton {
     font-size: 80px;
-    color: #FAFAFA;
+    color: rgb(100, 189, 99);
     width: 80px;
     height: 80px;
     position: absolute;
@@ -50,16 +53,17 @@ div.circular{
 	padding-bottom: 15%;
 	-moz-border-radius: 50%; 
 	border-radius: 50%;
-	background-color: #6DD16D;      
+	background-color: rgb(247, 247, 247);      
 }
 
 div#buttonPanel {
-    border: 1px solid white;  
+    /* border: 10px solid rgb(100, 189, 99); */  
     margin: 0px auto 0px auto;  
     min-width: 150px;  
     min-height: 150px;
     position: relative;
     top: 35%;
+    box-shadow: 0px 2px 5px rgba(0,0,0,0.4);
 }
 
 html {
@@ -153,19 +157,7 @@ div#sideMenu li {
     border: #ddd 1px solid;
 }
 
-@media(min-width: 768px){
 
-	div#sideMenu{
-		z-index: 110;
-		top: -50px;
-		right: 0px;
-	}
-	
-	div#sideMenu a{
-		border-bottom: none;
-	}
-
-}
 
 div#weatherInfoWrapper {
     position: absolute;      
@@ -253,17 +245,26 @@ ul#broadcastList li:last-child {
 }
 
 
+div.buttonListWrapper {
+    padding: 0px;
+    height: 100%;
+    background-color: rgb(243, 243, 243);
+}
+
 div.roomListWrapper {
+    padding: 0px;
+    background-color: #FFF;
 }
 
 ul#roomList {
     list-style-type: none;
     margin: 0px;
-    padding: 0px;
+    padding: 10px 30px;
+    background-color: rgb(243, 243, 243);
 }
 ul#roomList li {
     padding: 15px 0px 15px 0px;
-    border-bottom: #F5F5F5 1px solid;
+    border-bottom: #DFDCDC 1px solid;
 }
 span.roomName {
     font-size: 16px;
@@ -272,4 +273,49 @@ span.roomName {
 }
 span.switchButton {
     float: right;
+}
+
+div#buttonPanelWrapper {
+    background-color: #FFF;
+    padding: 100px 0px 30px 0px;
+    box-shadow: 0px 1px 15px #CACACA;
+    position: relative;
+}
+
+p.roomListButton {
+    text-align: center;
+    padding-top: 20px;
+    color: #BEBDBD;
+}
+
+@media(min-width: 768px){
+
+	div#sideMenu{
+		z-index: 110;
+		top: -50px;
+		right: 0px;
+	}
+	
+	div#sideMenu a{
+		border-bottom: none;
+	}
+	
+	body{
+		background-color: rgb(221, 221, 221);
+
+	}
+	
+	div#buttonPanelWrapper{
+		box-shadow: none;
+	}
+
+}
+
+
+@media(max-width: 768px){
+	
+	body{
+		background-color: rgb(243, 243, 243);
+	}
+
 }
