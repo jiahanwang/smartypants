@@ -1,5 +1,5 @@
 $(document).ready(function(){
-	// get the geolocation
+	/** get the geolocation and weather info **/
 	if(navigator.geolocation){
 		navigator.geolocation.getCurrentPosition(function(position){
 			// get weather info
@@ -50,7 +50,7 @@ $(document).ready(function(){
 	}else{
 		console.log("Your browser doesn't geolocation");
 	}
-	
+	// helper function
 	function getWeatherIcon(code){
 		var firstBit = (code + ' ').charAt(0);
 		switch(firstBit){
@@ -73,19 +73,16 @@ $(document).ready(function(){
 						return '<i class="wi-cloudy"></i>';
 		}
 	}
-	
-	
-	
 	//show and hide weatherInfoWrapper
 	$weatherInfo = $("div#weatherInfoWrapper");
 	$weatherButton = $('a#weather');
-	
+	$mainPanel = $("#mainPanel");
 	function weatherInfoHandler(){
 		if($(this).hasClass('opened')){
 			// hide
-			$weatherInfo.animate({
-				'top': '-200px',
-				'opacity': '0'
+			$mainPanel.animate({
+				'top': '-160px',
+				//'opacity': '0'
 			}, 500, function(){
 			});
 			$(this).removeClass('opened');
@@ -94,36 +91,42 @@ $(document).ready(function(){
 			// show
 			$('div#mCSB_1_container').css('left', '0px');
 			$('div#mCSB_1_dragger_horizontal').css('left', '0px')
-			$weatherInfo.animate({
+			$mainPanel.animate({
 				'top': '50px',
-				'opacity': '0.9'
+				//'opacity': '0.9'
 			}, 500 , function(){
 				
 			});
 			$(this).addClass('opened');
 		}
 	}
-
 	//$weatherButton.bind("touchstart", weatherClickHandler);
 	$weatherButton.on("click", weatherInfoHandler);
 	
-	//show and hide sideMenu
+	/** show and hide sideMenu **/
 	var $button = $('button#menuButton');
 	var $sideMenu = $('div#sideMenu');
-	
+	if($(window).width() < 768){
+		$sideMenu.css('right',  - $sideMenu.width() - 30 + 'px');
+	}else{
+		$sideMenu.css('right',  '0px');
+	}
 	$button.click(menuButtonHandler);
-	
 	function menuButtonHandler(){
 		console.log($(this).data('open'));
 		if($(this).data('open') === 'undefined'){
-			$sideMenu.css('right', -$sideMenu.width() - 30 + 'px');
+			$sideMenu.css('right', - $sideMenu.width() - 30 + 'px');
 			$(this).data('open', 'closed');
 		}
 		if($(this).data('open') === 'opened'){
 			$sideMenu.animate({
-				right: -$sideMenu.width() - 30 + 'px'
+				'right': - $sideMenu.width() - 30 + 'px'
 			}, 400, function(){
 				$button.data('open', 'closed');
+			});
+			$mainPanel.animate({
+				'right': '0px',
+			}, 400, function(){
 			});
 		}else{
 			$sideMenu.animate({
@@ -131,23 +134,85 @@ $(document).ready(function(){
 			}, 400, function(){
 				$button.data('open', 'opened');
 			});	
+			$mainPanel.animate({
+				'right': $sideMenu.width() + 30 + 'px',
+			}, 400, function(){
+			});
 		}
 	}
 	
-	//
+	/** solve sideMenu in larger screen **/
 	$(window).resize(function(){
 		var width = $(this).width();
 		if(width > 768){
 			$sideMenu.css('right', '0px');
 		}else{
-			$sideMenu.css('right', '-500px');
+			$sideMenu.css('right', - $sideMenu.width() - 30 + 'px');
 		}
 	});
 	
-	// beautify switch buttons
+	/** beautify switch buttons **/
 	var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
 	elems.forEach(function(html) {
 	  var switchery = new Switchery(html);
 	});
+	
+	/** central button  **/
+	$buttonPanel = $('div#buttonPanel');
+	$mainButton = $('div#mainButton');
+	var buttonClicked = false; // to avoid extra requests when onchange fired
+	$buttonPanel.on('click', function(){
+		var postData = {'mode' : 'all'};
+		postData.todo = $buttonPanel.hasClass('off') ? 'on' : 'off';
+		$.post('/', JSON.stringify(postData), function (data){	
+			console.log(data);
+			if(data.success){
+				if($buttonPanel.hasClass('off')){
+					// open main switch
+					$buttonPanel.removeClass('off');
+					// open all switches
+					buttonClicked = true;
+					$('.js-switch').each(function(){
+						if(!$(this).get(0).checked){
+							$(this).click();
+						}
+					});
+					buttonClicked = false;
+				}else{
+					// close main switch
+					$buttonPanel.addClass('off');
+					// close all switches
+					buttonClicked = true;
+					$('.js-switch').each(function(){
+						if($(this).get(0).checked){
+							$(this).click();
+						}
+					});
+					buttonClicked = false;
+				}
+			}
+		});
+	});
+	
+	
+	/** slide button  **/
+	$('.js-switch').on('change', function(){
+		if(buttonClicked) return;
+		var postData = {'mode' : 'single', 'id' : $(this).attr('data-id')};
+		postData.todo = $(this).get(0).checked ? 'on' : 'off';
+		$.post('/', JSON.stringify(postData), function (data){	
+			console.log(data);
+			if(data.success){
+				if($buttonPanel.hasClass('off') && data.overall_status){
+					$buttonPanel.removeClass('off');
+				}
+				if(! $buttonPanel.hasClass('off') && ! data.overall_status){
+					$buttonPanel.addClass('off');
+				}
+				$(this).click();
+			}
+		});
+	});
+	
 });
 

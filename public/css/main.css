@@ -3,6 +3,7 @@ body{
     min-width: 250px;
 	font-family: Open Sans, sans-serif;
     background-color: #F1F1F1;
+	overflow-y: hidden;
 }
 
 
@@ -10,7 +11,10 @@ body{
 div#mainPanel{
     height: 100%;
     width: 100%;
+	min-width: 250px;
     padding: 0px;
+	position: absolute;
+	top: -160px;
 }
 
 nav#navBar{
@@ -33,8 +37,11 @@ div#mainButton {
     height: 100px;
     width: 100px;
 }
+div#buttonPanel.off span#mainButton{
+	color: rgb(233, 233, 233);
+}
 
-span#mainButton {
+div#buttonPanel span#mainButton {
     font-size: 80px;
     color: rgb(100, 189, 99);
     width: 80px;
@@ -64,6 +71,7 @@ div#buttonPanel {
     position: relative;
     top: 35%;
     box-shadow: 0px 2px 5px rgba(0,0,0,0.4);
+	cursor: pointer;
 }
 
 html {
@@ -86,10 +94,6 @@ html {
 }
 .navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
     background-color: transparent;
-}
-.navbar-default .navbar-toggle .icon-bar:hover, .navbar-default .navbar-toggle .icon-bar:focus {
-    background-color: #FFFFFF;   
-    width: 25px; 
 }
 
 a#title{
@@ -159,15 +163,14 @@ div#sideMenu li {
 
 
 
-div#weatherInfoWrapper {
-    position: absolute;      
-	top: -200px;      
+div#weatherInfoWrapper {       
 	left: 0px;      
 	z-index: 90;            
     width: 100%;
     background-color: #585858;  
 	color: #F3F3F3;
     opacity: 0.9;
+	height: 160px;
 }
 
 div#weatherInfo {

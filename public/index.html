@@ -31,19 +31,19 @@
     </div>
   </div>
 </nav>
-<div id="weatherInfoWrapper">
-	<div id="weatherInfo">
-		<ul id="broadcastList"></ul>
-	</div>
-</div>
+
 <div id="sideMenu" class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
 	    <li><a href="#"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;&nbsp;Setting</a></li>
 		<li><a href="#"><span class="glyphicon glyphicon-envelope"></span>&nbsp;&nbsp;&nbsp;Message</a></li>
-      
       </ul>
 </div>
 <div id="mainPanel" class="container-fluid">
+	<div id="weatherInfoWrapper">
+		<div id="weatherInfo">
+			<ul id="broadcastList"></ul>
+		</div>
+	</div>
 	<div class="col-xs-12 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3  buttonListWrapper">
 		<div id="buttonPanelWrapper">
 				<div id="buttonPanel" class="circular">
@@ -51,24 +51,7 @@
 			</div>
 			<p class="roomListButton">Central Switch</p>
 		</div>
-		<ul id="roomList">
-			<li>
-				<span class="roomName">Living Room</span>
-				<span class="switchButton"><input type="checkbox" class="js-switch" checked /></span>
-			</li>
-			<li>
-				<span class="roomName">Master Bedroom</span>
-				<span class="switchButton"><input type="checkbox" class="js-switch" checked /></span>
-			</li>
-			<li>
-				<span class="roomName">Guest Bedroom</span>
-				<span class="switchButton"><input type="checkbox" class="js-switch" checked /></span>
-			</li>
-			<li>
-				<span class="roomName">Kitchen</span>
-				<span class="switchButton"><input type="checkbox" class="js-switch" checked /></span>
-			</li>
-		</ul>
+		<ul id="roomList"></ul>
 	</div>
 </div>
 </body>
