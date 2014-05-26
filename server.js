@@ -56,7 +56,6 @@ function postHandler(req, res){
 				responseData = {"mode" : "all", "success": false};
 			}
 			responseData = JSON.stringify(responseData);
-			console.log(responseData);
 			res.writeHead(200, {'Content-type' : "application/json", 'Conten-length': responseData.length});
 			res.end(responseData);
 		} else if (body.mode === 'single'){
@@ -71,7 +70,20 @@ function postHandler(req, res){
 				responseData = {"mode" : "single", "id" : body.id, "overall_status" : nfc.getOverallStatus(controllers), "success": false};
 			}
 			responseData = JSON.stringify(responseData);
-			console.log(responseData);
+			res.writeHead(200, {'Content-type' : "application/json", 'Conten-length': responseData.length});
+			res.end(responseData);
+		}else if (body.mode === 'polling'){
+			try{
+				responseData = {"mode" : "polling", "statusArray" : {}};
+				for(var id in controllers){
+					responseData.statusArray[id] = controllers[id].status;
+				}
+				responseData.overall_status =  nfc.getOverallStatus(controllers);
+				responseData.success = true;
+			}catch(err){
+				responseData = {"mode" : "polling", "success": false};
+			}
+			responseData = JSON.stringify(responseData);
 			res.writeHead(200, {'Content-type' : "application/json", 'Conten-length': responseData.length});
 			res.end(responseData);
 		}else{

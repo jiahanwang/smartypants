@@ -262,7 +262,7 @@ div.roomListWrapper {
 ul#roomList {
     list-style-type: none;
     margin: 0px;
-    padding: 10px 30px;
+    padding: 15px 30px;
     background-color: rgb(243, 243, 243);
 }
 ul#roomList li {
@@ -305,13 +305,17 @@ p.roomListButton {
 	
 	body{
 		background-color: rgb(221, 221, 221);
+		overflow-y: scroll;
 
 	}
 	
 	div#buttonPanelWrapper{
 		box-shadow: none;
 	}
-
+	
+	ul#roomList {
+		padding: 15px 15%;
+	}
 }
 
 

@@ -214,5 +214,30 @@ $(document).ready(function(){
 		});
 	});
 	
+	
+	/** polling **/
+	setInterval(polling, 5000);
+	function polling(){
+		var postData = {'mode' : 'polling'};
+		$.post('/', JSON.stringify(postData), function (data){
+			if(data.success){		
+				console.log(data);
+				$('.js-switch').each(function(){
+					buttonClicked = true;
+					if($(this).get(0).checked != data.statusArray[$(this).attr('data-id')]){
+						$(this).click();
+					}
+					buttonClicked = false;
+				});
+				if($buttonPanel.hasClass('off') && data.overall_status){
+					$buttonPanel.removeClass('off');
+				}
+				if(! $buttonPanel.hasClass('off') && ! data.overall_status){
+					$buttonPanel.addClass('off');
+				}
+			}
+		});
+	}
+	
 });
 
