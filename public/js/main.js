@@ -190,6 +190,8 @@ $(document).ready(function(){
 					});
 					buttonClicked = false;
 				}
+			}else{
+				window.location.reload();
 			}
 		});
 	});
@@ -210,6 +212,8 @@ $(document).ready(function(){
 					$buttonPanel.addClass('off');
 				}
 				$(this).click();
+			}else{
+				window.location.reload();
 			}
 		});
 	});
@@ -224,7 +228,11 @@ $(document).ready(function(){
 				console.log(data);
 				$('.js-switch').each(function(){
 					buttonClicked = true;
-					if($(this).get(0).checked != data.statusArray[$(this).attr('data-id')]){
+					// if the data-id doesn't exist, then reload the page
+					if(data.statusArray[$(this).attr('data-id')] === undefined){
+						window.location.reload();
+					}
+					if($(this).get(0).checked !== Boolean(data.statusArray[$(this).attr('data-id')])){
 						$(this).click();
 					}
 					buttonClicked = false;
