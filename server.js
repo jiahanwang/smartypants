@@ -1,7 +1,11 @@
-var http = require('http'),
+var 	http = require('http'),
 	fs = require('fs'),
 	path = require('path'),
-	nfc = require('./nfc.js'),
+	controllers_lib = require('./controllers.js'),
+	nfc_lib = require('nfc').nfc,
+	nfc = new nfc_lib(),
+	piezo_lib = require('./piezoController.js'),
+	sleep = require('sleep'),
 	extensions = {
 		".html" : "text/html",
 		".css" : "text/css",
@@ -65,9 +69,9 @@ function postHandler(req, res){
 				}else{
 					controllers[body.id].turnOff();
 				}
-				responseData = {"mode" : "single", "id" : body.id, "overall_status" : nfc.getOverallStatus(controllers), "success": true};
+				responseData = {"mode" : "single", "id" : body.id, "overall_status" : controllers_lib.getOverallStatus(controllers), "success": true};
 			}catch(err){
-				responseData = {"mode" : "single", "id" : body.id, "overall_status" : nfc.getOverallStatus(controllers), "success": false};
+				responseData = {"mode" : "single", "id" : body.id, "overall_status" : controllers_lib.getOverallStatus(controllers), "success": false};
 			}
 			responseData = JSON.stringify(responseData);
 			res.writeHead(200, {'Content-type' : "application/json", 'Conten-length': responseData.length});
@@ -78,7 +82,7 @@ function postHandler(req, res){
 				for(var id in controllers){
 					responseData.statusArray[id] = controllers[id].status;
 				}
-				responseData.overall_status =  nfc.getOverallStatus(controllers);
+				responseData.overall_status =  controllers_lib.getOverallStatus(controllers);
 				responseData.success = true;
 			}catch(err){
 				responseData = {"mode" : "polling", "success": false};
@@ -127,7 +131,7 @@ function respondContent(filePath, mimeType, res){
 						roomListHTML += "</ul>";
 						data = data.replace(/<ul id="roomList"><\/ul>/i, roomListHTML);
 						// change central button status
-						if(!nfc.getOverallStatus(controllers)){
+						if(!controllers_lib.getOverallStatus(controllers)){
 							data = data.replace(/class="circular"/i, 'class="circular off"');
 						}
 						res.writeHead(200, {'Content-type' : mimeType, 'Conten-length': data.length});
@@ -177,7 +181,31 @@ function respondServerError(errorCode, res){
 }
 
 function createServer(){
-	controllers = nfc.createControllers();
+	controllers = controllers_lib.createControllers();
+	// start the nfc
+	var home = false;// false === not at home, true === at home
+	var piezoController = new piezo_lib.PiezoController('piezo_1', 18); 
+	nfc.on('uid', function(uid){
+			console.log(uid);
+			//console.log(home);
+			//console.log(controllers_lib.getOverallStatus(controllers));
+			if(home){
+				for(var id in controllers){
+					controllers[id].turnOff();
+				}	
+				home = false; 
+			}else{
+				for(var id in controllers){
+					controllers[id].turnOn();
+				}
+				home = true;
+			}
+			//home = home === true ? false : true;
+			piezoController.beep();
+			sleep.sleep(1);
+	});
+	nfc.start();
+	// create the server
 	http.createServer(requestHandler).listen(3000);
 	console.log("HTTP server is listening on 3000 ...");
 }
