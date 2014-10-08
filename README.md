@@ -1,4 +1,4 @@
-Smartpants
+Smartypants
 ==========
 
 INF 241 Project
